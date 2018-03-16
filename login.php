@@ -1,4 +1,20 @@
-﻿<!DOCTYPE html>
+<?php
+ require 'Connectdb.php';
+//session_start();
+ if(!empty($_POST)) 
+{
+ $username=$_POST['username'];
+ $password=$_POST['pass'];
+     $temp= mysqli_fetch_assoc(mysqli_query($connect,"SELECT Password from reg_user WHERE Username='$username'"));
+     $check_pass=$temp["Password"];
+if($check_pass==$password)
+{  header('Location: https://www.google.com'); echo "Welcome $username !!!";}
+else  { echo "       Incorrect password ";die('Error: ' . mysqli_error($connect)); }
+ }
+ mysqli_close($connect);
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>EduM Login</title>
@@ -30,7 +46,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178">
+				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" method="post">
 					<span class="login100-form-title">
 						Sign In
 					</span>
@@ -66,7 +82,7 @@
 							Don’t have an account?
 						</span>
 
-						<a href="Sign_up.htm" class="txt3">
+						<a href="Sign_up.php" class="txt3">
 							Sign up now
 						</a>
 					</div>

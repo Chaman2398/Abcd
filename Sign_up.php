@@ -1,7 +1,39 @@
 <!DOCTYPE html>
+<?php
+ require 'Connectdb.php';
+
+    // create a variable
+if(!empty($_POST)) 
+{  $name=$_POST['name'];
+ $email=$_POST['email'];
+  $username=$_POST['username'];
+ $password=$_POST['pass'];
+ 
+//Execute the query
+ 
+
+ if (mysqli_query($connect,"INSERT INTO reg_user
+         VALUES ('$name','$email','$username','$password')"))
+ {
+  echo "Succesful registered";
+  }
+
+else {
+    die('Error: ' . mysqli_error($connect));
+
+    }
+
+ //echo $que = mysqli_query($connect,$query);
+}
+ mysqli_close($connect);
+
+?>
+
+
+
 <html lang="en">
 <head>
-	<title>EduM Login</title>
+	<title>EduM Sign up</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -30,25 +62,26 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178">
+				<form method="post" class="login100-form validate-form p-l-55 p-r-55 p-t-178" >
 					<span class="login100-form-title">
 						Sign up
 					</span>
-                    <div class="wrap-input100 validate-input m-b-16" data-validate = "Please enter password">
-						<input class="input100" type="text" name="name" placeholder="Name">
+
+                    <div class="wrap-input100 validate-input m-b-16" data-validate = "Please enter Name">
+						<input class="input100" type="text" name="name" placeholder="Name" required>
 						<span class="focus-input100"></span>
 					</div>
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "Please enter password">
-						<input class="input100" type="email" name="email" placeholder="Email">
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Please enter email">
+						<input class="input100" type="email" name="email" placeholder="Email" required>
 						<span class="focus-input100"></span>
 					</div>
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-						<input class="input100" type="text" name="username" placeholder="Username">
+						<input class="input100" type="text" name="username" placeholder="Username" required>
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Please enter password">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+						<input class="input100" type="password" name="pass" placeholder="Password" required>
 						<span class="focus-input100"></span>
 					</div>
 					
@@ -64,9 +97,8 @@
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Sign in
-						</button>
+						<input class="login100-form-btn" type="submit" value="Sign Up"> 
+							
 					</div>
 
 					<div class="flex-col-c p-t-170 p-b-40">
@@ -74,7 +106,7 @@
 							Already have account?
 						</span>
 
-						<a href="index.html" class="txt3">
+						<a href="login.php" class="txt3">
 							Login now!
 						</a>
 					</div>
@@ -83,7 +115,7 @@
 		</div>
 	</div>
 	
-	
+  
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
